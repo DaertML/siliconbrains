@@ -15,4 +15,19 @@ The first approach is to use bare Python to make the first design of the TPU, th
 The first chip that will get designed is a simple chip that will do simple MLPs: focus on dense and ReLUs, which can bring us quite far for many nowadays problems.
 
 ### Design
-TODO
+The DC-1 follows the Systolic-Array Architecture, as other TPU solutions like Google TPUs, one of the main focus is to be efficient in the data transfer between registers and memory segments, so that, matrix multiplications can be done fast.
+
+#### Registers
+- R0 - R15: General-purpose tensor registers. These hold references to tensors in memory.
+- SC0 - SC7: Scalar registers for immediate values or control flow.
+
+#### Memory
+- Weight Memory (WMEM): Stores model weights.
+- Input Memory (IMEM): Stores input activations.
+- Output Memory (OMEM): Stores output activations.
+- Scratchpad Memory (SMEM): Temporary storage for intermediate results.
+
+#### Data Types:
+- FP32: 32-bit Floating Point (our primary data type)
+- INT32: 32-bit Integer (for indexing/control)
+
